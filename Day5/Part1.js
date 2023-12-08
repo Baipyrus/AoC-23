@@ -1,7 +1,10 @@
 import { readFileSync } from "fs";
 const t0 = performance.now();
 
-const categories = readFileSync("input.txt").toString().split("\n\n");
+const categories = readFileSync("input.txt")
+	.toString()
+	.split("\n\n")
+	.filter((e) => e.length > 0);
 const seeds = categories[0]
 	.split(" ")
 	.slice(1)
