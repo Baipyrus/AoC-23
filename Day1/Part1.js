@@ -13,7 +13,6 @@ const numbers = lines.map((a) =>
 );
 const combinations = numbers.map((e) => parseInt(e[0] + e[e.length - 1]));
 const sum = combinations.reduce((a, i) => a + i);
-console.log(combinations);
 console.log(sum);
 
 const t1 = performance.now();

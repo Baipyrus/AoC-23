@@ -41,7 +41,6 @@ const numbers = lines.map((a) => {
 	return parseInt(after[0][0] + after[i][0]);
 });
 const sum = numbers.reduce((a, i) => a + i);
-console.log(JSON.stringify(numbers));
 console.log(sum);
 
 const t1 = performance.now();
