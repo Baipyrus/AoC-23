@@ -12,8 +12,8 @@ const maps = input.slice(1).map((a) => {
 	const [_, L, R] = mapping;
 	return { name, mapping: { L, R } };
 });
-let count,
-	index = (count = 0);
+let count = 0,
+	index = 0;
 let current = maps.find((e) => e.name === "AAA");
 while (current.name !== "ZZZ") {
 	const direction = instructions[index];
