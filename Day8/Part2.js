@@ -28,7 +28,11 @@ const cycles = maps
 		}
 		return { start: e, end: current, length: count };
 	});
-console.log(cycles);
+const sizes = cycles.map((e) => e.length);
+const gcd = (a, b) => (b == 0 ? a : gcd(b, a % b));
+const lcm = (a, b) => (a / gcd(a, b)) * b;
+const total = sizes.reduce(lcm, 1);
+console.log(total);
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
