@@ -10,7 +10,8 @@ const cardPattern = [
 	[4, 1],
 	[5],
 ];
-const cards = ["A", "K", "Q", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"];
+const cards = ["A", "K", "Q", "T", "9", "8", "7", "6", "5", "4", "3", "2", "J"];
+const JOKER_INDEX = "12";
 const input = readFileSync("input.txt")
 	.toString()
 	.split("\n")
@@ -28,9 +29,14 @@ const plays = input
 				t[i] = (t[i] ?? 0) + 1;
 				return t;
 			}, {});
+		const joker = count[JOKER_INDEX];
+		const jCheck = joker && joker !== 5;
+		if (jCheck) count[JOKER_INDEX] = 0;
 		const pattern = Object.keys(count)
 			.map((e) => count[e])
+			.filter((e) => e > 0)
 			.sort((a, b) => b - a);
+		if (jCheck) pattern[0] += joker;
 		const hand = cardPattern.findIndex((a) =>
 			a.every((b, c) => b === pattern[c])
 		);
