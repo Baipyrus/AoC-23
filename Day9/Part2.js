@@ -20,13 +20,13 @@ const predictions = histories.map((e) => {
 		}, []);
 	}
 	const last = sequences.pop();
-	const extrapolated = [[...last, last[0]]];
+	let extrapolated = [last[0], ...last];
 	for (const s of sequences.reverse()) {
-		const current = s.pop();
-		const last = extrapolated.pop().pop();
-		extrapolated.push([...s, current + last]);
+		const current = s.shift();
+		const last = extrapolated.shift();
+		extrapolated = [current - last, ...s];
 	}
-	return extrapolated.pop().pop();
+	return extrapolated.shift();
 });
 const sum = predictions.reduce((a, i) => a + i);
 console.log(sum);
