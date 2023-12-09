@@ -12,18 +12,23 @@ const maps = input.slice(1).map((a) => {
 	const [_, L, R] = mapping;
 	return { name, mapping: { L, R } };
 });
-let count = 0,
-	index = 0;
-let current = maps.find((e) => e.name === "AAA");
-while (current.name !== "ZZZ") {
-	const direction = instructions[index];
-	const mapping = current.mapping[direction];
+const cycles = maps
+	.filter((e) => e.name.endsWith("A"))
+	.map((e) => {
+		let count = 0,
+			index = 0;
+		let current = e;
+		while (!current.name.endsWith("Z")) {
+			const direction = instructions[index];
+			const mapping = current.mapping[direction];
 
-	current = maps.find((e) => e.name === mapping);
-	index = (index + 1) % instructions.length;
-	count++;
-}
-console.log(count);
+			current = maps.find((a) => a.name === mapping);
+			index = (index + 1) % instructions.length;
+			count++;
+		}
+		return { start: e, end: current, length: count };
+	});
+console.log(cycles);
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
