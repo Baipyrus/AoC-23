@@ -6,19 +6,30 @@ const input = readFileSync("input.txt")
 	.split("\n")
 	.filter((e) => e.length > 0);
 const histories = input.map((e) => e.split(" ").map(Number));
-const sequences = [];
-let current = histories[0];
-while (!current.every((e) => e === 0)) {
-	sequences.push(current);
-	current = current.reduce((a, n, i) => {
-		if (i === 0) return a;
-		const d = n - current[i - 1];
-		const t = a;
-		t.push(d);
-		return t;
-	}, []);
-}
-console.log(sequences);
+const predictions = histories.map((e) => {
+	let current = e;
+	const sequences = [];
+	while (!current.every((e) => e === 0)) {
+		sequences.push(current);
+		current = current.reduce((a, n, i) => {
+			if (i === 0) return a;
+			const d = n - current[i - 1];
+			const t = a;
+			t.push(d);
+			return t;
+		}, []);
+	}
+	const last = sequences.pop();
+	const extrapolated = [[...last, last[0]]];
+	for (const s of sequences.reverse()) {
+		const current = s.pop();
+		const last = extrapolated.pop().pop();
+		extrapolated.push([...s, current + last]);
+	}
+	return extrapolated.pop().pop();
+});
+const sum = predictions.reduce((a, i) => a + i);
+console.log(sum);
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
