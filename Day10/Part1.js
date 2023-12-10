@@ -73,8 +73,8 @@ while (open.length > 0) {
 				y: ny,
 			};
 
-			if (!relPos(bends[symbol], -i, -j)) continue;
 			if (closed.some((e) => compare(e, next))) continue;
+			if (!relPos(bends[symbol], -i, -j)) continue;
 
 			open.push(next);
 		}
