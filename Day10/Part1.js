@@ -79,7 +79,8 @@ while (open.length > 0) {
 			open.push(next);
 		}
 }
-console.log(closed.sort((a, b) => b.distance - a.distance)[0].distance);
+const furthest = closed.sort((a, b) => b.distance - a.distance)[0];
+console.log(furthest.distance);
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
