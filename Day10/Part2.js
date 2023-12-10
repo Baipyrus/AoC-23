@@ -56,6 +56,7 @@ const open = [
 while (open.length > 0) {
 	const current = open.shift();
 	closed.push(current);
+	input[current.y][current.x] = "+";
 
 	const directions = bends[current.symbol];
 	for (let j = -1; j < 2; j++)
@@ -79,8 +80,7 @@ while (open.length > 0) {
 			open.push(next);
 		}
 }
-const furthest = closed.sort((a, b) => b.distance - a.distance)[0];
-console.log(furthest.distance);
+console.log(input.map((e) => e.join("")).join("\n"));
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
