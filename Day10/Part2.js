@@ -75,7 +75,7 @@ while (open.length > 0) {
 			};
 
 			if (closed.some((e) => compare(e, next))) continue;
-			if (!relPos(bends[symbol], -i, -j)) continue;
+			if (!bends[symbol] || !relPos(bends[symbol], -i, -j)) continue;
 
 			open.push(next);
 		}
