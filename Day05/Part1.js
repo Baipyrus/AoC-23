@@ -10,7 +10,7 @@ const seeds = categories[0]
 	.slice(1)
 	.map((e) => parseInt(e));
 const dictionaries = categories.slice(1).map((e) => {
-	const splits = e.split("\n").filter((e) => e.length > 0);
+	const splits = e.split(/\r*\n/).filter((e) => e.length > 0);
 	const name = splits[0].replace(" map:", "");
 	const maps = splits.slice(1).map((a) =>
 		a

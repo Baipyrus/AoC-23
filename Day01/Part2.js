@@ -15,7 +15,7 @@ const names = {
 };
 const lines = readFileSync("input.txt")
 	.toString()
-	.split("\n")
+	.split(/\r*\n/)
 	.filter((e) => e.length > 0);
 const numbers = lines.map((a) => {
 	const f1 = Object.keys(names)

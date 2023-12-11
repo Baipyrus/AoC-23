@@ -3,7 +3,7 @@ const t0 = performance.now();
 
 const input = readFileSync("input.txt")
 	.toString()
-	.split("\n")
+	.split(/\r*\n/)
 	.filter((e) => e.length > 0);
 const instructions = input[0].split("");
 const maps = input.slice(1).map((a) => {

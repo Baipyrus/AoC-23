@@ -3,7 +3,7 @@ const t0 = performance.now();
 
 const lines = readFileSync("input.txt")
 	.toString()
-	.split("\n")
+	.split(/\r*\n/)
 	.filter((e) => e.length > 0);
 const cards = lines.map((line) => {
 	const id = parseInt(line.match(/^Card\s{1,}(\d{1,3}):/)[1]);

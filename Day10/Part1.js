@@ -38,7 +38,7 @@ const compare = (a, b) => a.x === b.x && a.y === b.y;
 
 const input = readFileSync("input.txt")
 	.toString()
-	.split("\n")
+	.split(/\r*\n/)
 	.filter((e) => e.length > 0)
 	.map((e) => e.split(""));
 const startY = input.findIndex((e) => e.includes("S"));

@@ -3,7 +3,7 @@ const t0 = performance.now();
 
 const lines = readFileSync("input.txt")
 	.toString()
-	.split("\n")
+	.split(/\r*\n/)
 	.filter((e) => e.length > 0);
 const powers = lines.map((e) => {
 	const pulls = e.split(":")[1].trim().split(";");

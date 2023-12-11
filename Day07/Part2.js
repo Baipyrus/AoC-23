@@ -14,7 +14,7 @@ const cards = ["A", "K", "Q", "T", "9", "8", "7", "6", "5", "4", "3", "2", "J"];
 const JOKER_INDEX = "12";
 const input = readFileSync("input.txt")
 	.toString()
-	.split("\n")
+	.split(/\r*\n/)
 	.filter((e) => e.length > 0);
 const plays = input
 	.map((p) => {

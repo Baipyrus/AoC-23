@@ -3,7 +3,7 @@ const t0 = performance.now();
 
 const input = readFileSync("input.txt")
 	.toString()
-	.split("\n")
+	.split(/\r*\n/)
 	.filter((e) => e.length > 0);
 const histories = input.map((e) => e.split(" ").map(Number));
 const predictions = histories.map((e) => {

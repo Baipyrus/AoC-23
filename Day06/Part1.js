@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 const t0 = performance.now();
 
-const input = readFileSync("input.txt").toString().split("\n");
+const input = readFileSync("input.txt").toString().split(/\r*\n/);
 const time = input[0]
 	.split(/\s{1,}/)
 	.slice(1)
