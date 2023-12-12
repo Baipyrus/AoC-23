@@ -25,7 +25,14 @@ const galaxies = universe
 	.map((a, y) => a.map((b, x) => ({ s: b, x, y })).filter((b) => b.s === "#"))
 	.filter((e) => e.length > 0)
 	.reduce((a, i) => [...a, ...i], []);
-console.log(galaxies);
+const distances = galaxies.map((c, i) =>
+	galaxies.reduce(
+		(a, n, j) => a + (j > i ? Math.abs(c.x - n.x + c.y - n.y) : 0),
+		0
+	)
+);
+const sum = distances.reduce((a, i) => a + i);
+console.log(sum);
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
