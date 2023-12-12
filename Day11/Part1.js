@@ -15,8 +15,13 @@ const expand = (arr) =>
 		],
 		[]
 	);
+const flip = (current) =>
+	Array.from({ length: current[0].length }, (_, x) =>
+		Array.from({ length: current.length }, (_, y) => current[y][x])
+	);
 
-console.log(expand(input));
+const universe = flip(expand(flip(expand(input))));
+console.log(universe);
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
