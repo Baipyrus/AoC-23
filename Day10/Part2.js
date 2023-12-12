@@ -80,7 +80,30 @@ while (open.length > 0) {
 			open.push(next);
 		}
 }
+
 console.log(input.map((e) => e.join("")).join("\n"));
+let count = 0;
+input.forEach((l, j) => {
+	let wallLength = 0;
+	let lastWall = false;
+	let intersections = 0;
+	l.forEach((c, i) => {
+		const isWall = c === "+";
+		if (isWall) {
+			if (!lastWall) {
+				intersections++;
+				lastWall = true;
+			}
+			wallLength++;
+			return;
+		}
+		if (lastWall && wallLength > 1) intersections++;
+		wallLength = 0;
+		lastWall = false;
+		if (intersections % 2 === 1 && l.slice(i + 1).includes("+")) count++;
+	});
+});
+console.log(count);
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
