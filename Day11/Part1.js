@@ -27,7 +27,7 @@ const galaxies = universe
 	.reduce((a, i) => [...a, ...i], []);
 const distances = galaxies.map((c, i) =>
 	galaxies.reduce(
-		(a, n, j) => a + (j > i ? Math.abs(c.x - n.x + c.y - n.y) : 0),
+		(a, n, j) => a + (j > i ? Math.abs(c.x - n.x) + Math.abs(c.y - n.y) : 0),
 		0
 	)
 );
