@@ -22,6 +22,16 @@ pub fn main() {
     }
 }
 
+fn expand(strct: &mut Vec<Vec<i32>>) {
+    let last = strct
+        .last_mut()
+        .unwrap();
+    last.push(*last
+        .last()
+        .unwrap()
+    );
+}
+
 fn extra_diff(seq: Vec<i32>) -> Vec<Vec<i32>> {
     let mut structure = vec![seq]; 
     let mut index = 0;
