@@ -2,7 +2,7 @@ use crate::common::{convert_num, read_file, split_inputs, split_lines};
 
 #[allow(dead_code)]
 pub fn part_two() {
-    predict(false)
+    predict(false);
 }
 
 #[allow(dead_code)]
