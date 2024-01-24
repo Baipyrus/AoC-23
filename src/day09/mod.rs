@@ -1,7 +1,7 @@
 use crate::common::{read_file, split_inputs, split_lines};
 
 pub fn main() {
-    let name = "day9";
+    let name = "day09";
     println!("Executing module '{name}' entrypoint . . . ");
     
     let content = read_file(name);

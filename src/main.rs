@@ -1,7 +1,7 @@
 mod common;
-mod day9;
+mod day09;
 
 fn main() {
     println!("Executing main entrypoint . . . ");
-    day9::main();
+    day09::main();
 }
