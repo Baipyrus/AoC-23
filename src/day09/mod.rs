@@ -9,22 +9,24 @@ pub fn main() {
     let input = split_inputs(lines, &r"\s+");
 
     let sequences = convert_num(input);   
-    let structures: Vec<Vec<Vec<i32>>> = sequences
+    let predictions: Vec<i32> = sequences
         .iter()
         .map(|s| {
             let current = s.to_vec();
             let mut next = extra_diff(current);
             expand(&mut next);
-            next
+            next.first()
+                .unwrap()
+                .last()
+                .unwrap()
+                .clone()
         })
         .collect();
-
-    for seq in structures[0].clone() {
-        for n in seq {
-            print!("{n} ");
-        }
-        println!("");
-    }
+    let sum: i32 = predictions
+        .iter()
+        .sum();
+    
+    println!("The sum of all prediction values is: '{sum}'.");
 }
 
 fn expand(strct: &mut Vec<Vec<i32>>) {
