@@ -1,4 +1,4 @@
-use crate::common::{read_file, split_inputs, split_lines};
+use crate::common::{convert_num, read_file, split_inputs, split_lines};
 
 pub fn main() {
     let name = "day09";
@@ -7,8 +7,11 @@ pub fn main() {
     let content = read_file(name);
     let lines = split_lines(&content);
     let input = split_inputs(lines, &r"\s+");
+    let sequences = convert_num(input);   
     
-    for value in &input[0] {
-        print!("{value}, ");
-    }
+    let sum_input_0: i32 = sequences[0]
+        .clone()
+        .into_iter()
+        .sum();
+    println!("Erste Summe: {sum_input_0}");
 }

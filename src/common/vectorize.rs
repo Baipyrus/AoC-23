@@ -30,3 +30,18 @@ pub fn split_inputs(input: Vec<String>, re: &str) -> Vec<Vec<String>> {
 
     result
 }
+
+pub fn convert_num(input: Vec<Vec<String>>) -> Vec<Vec<i32>> {
+    input
+        .into_iter()
+        .map(|a| {
+            a
+                .into_iter()
+                .map(|b| {
+                    b
+                        .trim()
+                      .parse::<i32>()
+                        .expect("Invalid numeric value in input!")
+                }).collect()
+        }).collect()
+}
