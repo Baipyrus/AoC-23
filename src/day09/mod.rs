@@ -11,7 +11,12 @@ pub fn main() {
     let sequences = convert_num(input);   
     let structures: Vec<Vec<Vec<i32>>> = sequences
         .iter()
-        .map(|s| extra_diff(s.to_vec()))
+        .map(|s| {
+            let current = s.to_vec();
+            let mut next = extra_diff(current);
+            expand(&mut next);
+            next
+        })
         .collect();
 
     for seq in structures[0].clone() {
@@ -30,6 +35,29 @@ fn expand(strct: &mut Vec<Vec<i32>>) {
         .last()
         .unwrap()
     );
+
+    for i in (0..strct.len() - 1).rev() {
+        let last = strct
+            .get(i + 1)
+            .unwrap()
+            .clone();
+        let current = strct
+            .get_mut(i)
+            .unwrap();
+        
+
+        let next =
+            current
+                .last()
+                .unwrap()
+                .clone() +
+            last
+                .last()
+                .unwrap()
+                .clone();
+
+        current.push(next);
+    }
 }
 
 fn extra_diff(seq: Vec<i32>) -> Vec<Vec<i32>> {
