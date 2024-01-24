@@ -2,23 +2,37 @@ use crate::common::{convert_num, read_file, split_inputs, split_lines};
 
 #[allow(dead_code)]
 pub fn part_two() {
-    unimplemented!();
+    predict(false)
 }
 
 #[allow(dead_code)]
 pub fn part_one() {
+    predict(true);
+}
+
+fn predict(forward: bool) {
     let sequences = setup();
     let predictions: Vec<i32> = sequences
         .iter()
         .map(|s| {
             let current = s.to_vec();
             let mut next = extra_diff(current);
-            expand(&mut next);
-            next.first()
-                .unwrap()
-                .last()
-                .unwrap()
-                .clone()
+            expand(&mut next, forward);
+            let history = next
+                .first()
+                .unwrap();
+            
+            if forward {
+                history
+                    .last()
+                    .unwrap()
+                    .clone()
+            } else {
+                history
+                    .first()
+                    .unwrap()
+                    .clone()
+            }
         })
         .collect();
     
@@ -29,7 +43,7 @@ pub fn part_one() {
     println!("The sum of all prediction values is: '{sum}'.");
 }
 
-fn expand(strct: &mut Vec<Vec<i32>>) {
+fn expand(strct: &mut Vec<Vec<i32>>, forward: bool) {
     let last = strct
         .last_mut()
         .unwrap();
@@ -48,17 +62,30 @@ fn expand(strct: &mut Vec<Vec<i32>>) {
             .unwrap();
         
 
-        let next =
-            current
-                .last()
-                .unwrap()
-                .clone() +
-            last
-                .last()
-                .unwrap()
-                .clone();
-
-        current.push(next);
+        if forward {
+            current.push(
+                current
+                    .last()
+                    .unwrap()
+                    .clone() +
+                last
+                    .last()
+                    .unwrap()
+                    .clone()
+            );
+        } else {
+            current.insert(
+                0,
+                current
+                    .first()
+                    .unwrap()
+                    .clone() -
+                last
+                    .first()
+                    .unwrap()
+                    .clone()
+            );
+        }
     }
 }
 
