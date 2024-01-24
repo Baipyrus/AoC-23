@@ -1,9 +1,11 @@
 use crate::common::{convert_num, read_file, split_inputs, split_lines};
 
+#[allow(dead_code)]
 pub fn part_two() {
     unimplemented!();
 }
 
+#[allow(dead_code)]
 pub fn part_one() {
     let sequences = setup();
     let predictions: Vec<i32> = sequences
