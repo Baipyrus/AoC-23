@@ -11,7 +11,7 @@ pub fn main() {
     let sequences = convert_num(input);   
     let structures: Vec<Vec<Vec<i32>>> = sequences
         .iter()
-        .map(|s| extrapolate(s.to_vec()))
+        .map(|s| extra_diff(s.to_vec()))
         .collect();
 
     for seq in structures[0].clone() {
@@ -22,7 +22,7 @@ pub fn main() {
     }
 }
 
-fn extrapolate(seq: Vec<i32>) -> Vec<Vec<i32>> {
+fn extra_diff(seq: Vec<i32>) -> Vec<Vec<i32>> {
     let mut structure = vec![seq]; 
     let mut index = 0;
 
