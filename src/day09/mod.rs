@@ -8,24 +8,35 @@ pub fn main() {
     let lines = split_lines(&content);
     let input = split_inputs(lines, &r"\s+");
 
-    let sequences = convert_num(input);   
-    let predictions: Vec<i32> = sequences
+    let sequences = convert_num(input);
+    let structures: Vec<Vec<Vec<i32>>> = sequences
         .iter()
         .map(|s| {
             let current = s.to_vec();
             let mut next = extra_diff(current);
             expand(&mut next);
-            next.first()
+            next
+        })
+        .collect();
+    
+    part_one(&structures);
+}
+
+fn part_one(strcts: &Vec<Vec<Vec<i32>>>) {
+    let predictions: Vec<i32> = strcts
+        .iter()
+        .map(|seq|
+            seq
+                .first()
                 .unwrap()
                 .last()
                 .unwrap()
                 .clone()
-        })
-        .collect();
+        ).collect();
     let sum: i32 = predictions
         .iter()
         .sum();
-    
+
     println!("The sum of all prediction values is: '{sum}'.");
 }
 
