@@ -8,7 +8,28 @@ pub fn part_two() {
 #[allow(dead_code)]
 pub fn part_one() {
     let input = setup();
+
+    let mut galaxies = extract(input);
 }
+
+fn extract(symbols: Vec<Vec<String>>) -> Vec<Galaxy> {
+    let mut galaxies = Vec::new();
+    
+    for (y, line) in symbols.iter().enumerate() {
+        for (x, symbol) in line.iter().enumerate() {
+            if symbol.as_str() == "." { continue; }
+            galaxies.push(Galaxy { x, y });
+        }
+    }
+
+    galaxies
+}
+
+struct Galaxy {
+    x: usize,
+    y: usize,
+}
+
 
 fn setup() -> Vec<Vec<String>> {
     let name = "day11";
