@@ -1,4 +1,4 @@
-use crate::common::{convert_num, read_file, split_inputs, split_lines};
+use crate::common::{convert_num, read_file, match_inputs, split_lines};
 
 #[allow(dead_code)]
 pub fn part_two() {
@@ -122,6 +122,6 @@ fn setup() -> Vec<Vec<i32>> {
     
     let content = read_file(name);
     let lines = split_lines(&content);
-    let input = split_inputs(lines, &r"\s+");
+    let input = match_inputs(lines, &r"\s*-?\d+\s*");
     convert_num(input)
 }

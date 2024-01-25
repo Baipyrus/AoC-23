@@ -8,23 +8,23 @@ pub fn split_lines(input: &str) -> Vec<String> {
         .collect()
 }
 
-pub fn split_input(entry: &str, re: &str) -> Vec<String> {
+pub fn match_input(entry: &str, re: &str) -> Vec<String> {
     let regex = Regex::new(re)
-        .expect("Invalid regex");
+        .expect("Invalid regex provided!");
     
-    let split: Vec<String> = regex
-        .split(entry)
-        .map(|s| s.to_string())
+    let matches: Vec<String> = regex
+        .find_iter(entry)
+        .map(|m| m.as_str().to_string())
         .collect();
     
-    split
+    matches
 }
 
-pub fn split_inputs(input: Vec<String>, re: &str) -> Vec<Vec<String>> {
+pub fn match_inputs(input: Vec<String>, re: &str) -> Vec<Vec<String>> {
     let mut result = Vec::new();
 
     for entry in input {
-        let split = split_input(&entry, re);
+        let split = match_input(&entry, re);
         result.push(split);
     }
 
