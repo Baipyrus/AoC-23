@@ -11,6 +11,22 @@ pub fn part_one() {
 
     let mut galaxies = extract(input);
     expand(&mut galaxies);
+    let distances = sum_dist(galaxies);
+
+    println!("The sum of all distances is: '{distances}'.");
+}
+
+fn sum_dist(galaxies: Vec<Galaxy>) -> usize {
+    let mut distances = 0;
+
+    for (i, a) in galaxies.iter().enumerate() {
+        for b in galaxies.iter().skip(i) {
+            if b.compare(a) { continue; }
+            distances += a.distance(b);
+        }
+    }
+
+    distances
 }
 
 fn extract(symbols: Vec<Vec<String>>) -> Vec<Galaxy> {
@@ -36,6 +52,17 @@ struct Galaxy {
     y: usize,
 }
 
+impl Galaxy {
+    fn distance(&self, other: &Galaxy) -> usize {
+        let dx = (other.x as isize - self.x as isize).abs();
+        let dy = (other.y as isize - self.y as isize).abs();
+        (dx + dy) as usize
+    }
+
+    fn compare(&self, other: &Galaxy) -> bool {
+        self.x == other.x && self.y == other.y
+    }
+}
 
 fn setup() -> Vec<Vec<String>> {
     let name = "day11";
