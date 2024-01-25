@@ -10,6 +10,7 @@ pub fn part_one() {
     let input = setup();
 
     let mut galaxies = extract(input);
+    expand(&mut galaxies);
 }
 
 fn extract(symbols: Vec<Vec<String>>) -> Vec<Galaxy> {
@@ -23,6 +24,11 @@ fn extract(symbols: Vec<Vec<String>>) -> Vec<Galaxy> {
     }
 
     galaxies
+}
+
+
+fn expand(galaxies: &mut Vec<Galaxy>) {
+    
 }
 
 struct Galaxy {
