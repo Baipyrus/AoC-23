@@ -42,7 +42,6 @@ fn extract(symbols: Vec<Vec<String>>) -> Vec<Galaxy> {
     galaxies
 }
 
-
 fn expand(galaxies: &mut Vec<Galaxy>) {
     
 }
