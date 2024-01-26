@@ -1,9 +1,7 @@
-use crate::common::{read_file, match_inputs, split_lines};
+use crate::common::{match_inputs, read_file, split_lines};
 
 #[allow(dead_code)]
-pub fn part_two() {
-
-}
+pub fn part_two() {}
 
 #[allow(dead_code)]
 pub fn part_one() {
@@ -21,7 +19,9 @@ fn sum_dist(galaxies: Vec<Galaxy>) -> usize {
 
     for (i, a) in galaxies.iter().enumerate() {
         for b in galaxies.iter().skip(i) {
-            if b.compare(a) { continue; }
+            if b.compare(a) {
+                continue;
+            }
             distances += a.distance(b);
         }
     }
@@ -31,10 +31,12 @@ fn sum_dist(galaxies: Vec<Galaxy>) -> usize {
 
 fn extract(symbols: Vec<Vec<String>>) -> Vec<Galaxy> {
     let mut galaxies = Vec::new();
-    
+
     for (y, line) in symbols.iter().enumerate() {
         for (x, symbol) in line.iter().enumerate() {
-            if symbol.as_str() == "." { continue; }
+            if symbol.as_str() == "." {
+                continue;
+            }
             galaxies.push(Galaxy { x, y });
         }
     }
@@ -42,9 +44,7 @@ fn extract(symbols: Vec<Vec<String>>) -> Vec<Galaxy> {
     galaxies
 }
 
-fn expand(galaxies: &mut Vec<Galaxy>) {
-    
-}
+fn expand(galaxies: &mut Vec<Galaxy>) {}
 
 struct Galaxy {
     x: usize,
@@ -66,7 +66,7 @@ impl Galaxy {
 fn setup() -> Vec<Vec<String>> {
     let name = "day11";
     println!("Executing module '{name}' entrypoint . . . ");
-    
+
     let content = read_file(name);
     let lines = split_lines(&content);
     match_inputs(lines, &r".")

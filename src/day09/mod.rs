@@ -1,4 +1,4 @@
-use crate::common::{convert_num, read_file, match_inputs, split_lines};
+use crate::common::{convert_num, match_inputs, read_file, split_lines};
 
 #[allow(dead_code)]
 pub fn part_two() {
@@ -18,85 +18,48 @@ fn predict(forward: bool) {
             let current = s.to_vec();
             let mut next = extra_diff(current);
             expand(&mut next, forward);
-            let history = next
-                .first()
-                .unwrap();
-            
+            let history = next.first().unwrap();
+
             if forward {
-                history
-                    .last()
-                    .unwrap()
-                    .clone()
+                history.last().unwrap().clone()
             } else {
-                history
-                    .first()
-                    .unwrap()
-                    .clone()
+                history.first().unwrap().clone()
             }
         })
         .collect();
-    
-    let sum: i32 = predictions
-        .iter()
-        .sum();
+
+    let sum: i32 = predictions.iter().sum();
 
     println!("The sum of all prediction values is: '{sum}'.");
 }
 
 fn expand(strct: &mut Vec<Vec<i32>>, forward: bool) {
-    let last = strct
-        .last_mut()
-        .unwrap();
-    last.push(*last
-        .last()
-        .unwrap()
-    );
+    let last = strct.last_mut().unwrap();
+    last.push(*last.last().unwrap());
 
     for i in (0..strct.len() - 1).rev() {
-        let last = strct
-            .get(i + 1)
-            .unwrap()
-            .clone();
-        let current = strct
-            .get_mut(i)
-            .unwrap();
-        
+        let last = strct.get(i + 1).unwrap().clone();
+        let current = strct.get_mut(i).unwrap();
 
         if forward {
-            current.push(
-                current
-                    .last()
-                    .unwrap()
-                    .clone() +
-                last
-                    .last()
-                    .unwrap()
-                    .clone()
-            );
+            current.push(current.last().unwrap().clone() + last.last().unwrap().clone());
         } else {
             current.insert(
                 0,
-                current
-                    .first()
-                    .unwrap()
-                    .clone() -
-                last
-                    .first()
-                    .unwrap()
-                    .clone()
+                current.first().unwrap().clone() - last.first().unwrap().clone(),
             );
         }
     }
 }
 
 fn extra_diff(seq: Vec<i32>) -> Vec<Vec<i32>> {
-    let mut structure = vec![seq]; 
+    let mut structure = vec![seq];
     let mut index = 0;
 
     loop {
         let current = &structure[index];
         let diff = seq_diff(current.to_vec());
-        
+
         if diff.iter().all(|&n| n == 0) {
             break structure;
         }
@@ -119,7 +82,7 @@ fn seq_diff(seq: Vec<i32>) -> Vec<i32> {
 fn setup() -> Vec<Vec<i32>> {
     let name = "day09";
     println!("Executing module '{name}' entrypoint . . . ");
-    
+
     let content = read_file(name);
     let lines = split_lines(&content);
     let input = match_inputs(lines, &r"\s*-?\d+\s*");

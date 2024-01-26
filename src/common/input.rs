@@ -4,13 +4,12 @@ use std::path::Path;
 
 pub fn read_file(name: &str) -> String {
     let path = Path::new("src").join(name).join("input.txt");
-    let mut file = File::open(&path)
-        .expect(&format!("Unable to open input for '{name}'."));
-    
+    let mut file = File::open(&path).expect(&format!("Unable to open input for '{name}'."));
+
     let mut contents = String::new();
     file.read_to_string(&mut contents)
         .expect(&format!("Unable to read input for '{name}'."));
-    
+
     contents
 }
 
@@ -23,6 +22,6 @@ pub fn read_stdin() -> String {
     io::stdin()
         .read_line(&mut input)
         .expect("Failed to read line!");
-    
+
     input
 }

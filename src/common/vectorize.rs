@@ -9,14 +9,13 @@ pub fn split_lines(input: &str) -> Vec<String> {
 }
 
 pub fn match_input(entry: &str, re: &str) -> Vec<String> {
-    let regex = Regex::new(re)
-        .expect("Invalid regex provided!");
-    
+    let regex = Regex::new(re).expect("Invalid regex provided!");
+
     let matches: Vec<String> = regex
         .find_iter(entry)
         .map(|m| m.as_str().to_string())
         .collect();
-    
+
     matches
 }
 
@@ -35,13 +34,13 @@ pub fn convert_num(input: Vec<Vec<String>>) -> Vec<Vec<i32>> {
     input
         .into_iter()
         .map(|a| {
-            a
-                .into_iter()
+            a.into_iter()
                 .map(|b| {
-                    b
-                        .trim()
-                      .parse::<i32>()
+                    b.trim()
+                        .parse::<i32>()
                         .expect("Invalid numeric value in input!")
-                }).collect()
-        }).collect()
+                })
+                .collect()
+        })
+        .collect()
 }
