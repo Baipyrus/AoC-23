@@ -13,6 +13,7 @@ const input = readFileSync("input.txt")
             y: j,
             g: 0,
             h: 0,
+            p: null,
         })));
 const man_dist = (a, b) => Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
 
@@ -47,17 +48,36 @@ while (open.length > 0) {
 
             const nd = current.g + next.c;
             if (open.includes(next)) {
-                if (nd < next.g)
+                if (nd < next.g) {
                     next.g = nd;
+                    next.p = current;
+                }
                 continue;
             }
 
             next.g = nd;
+            next.p = current;
             next.h = man_dist(next, end);
             open.push(next);
         }
 }
 console.log(end.g);
+
+const shortest = [];
+let path = end;
+while (path) {
+    shortest.push(path);
+    path = path.p;
+}
+console.log(
+    input
+        .map(a => a
+            .map(b => shortest
+                .includes(b) ?
+                "*" : b.c
+            ).join("")
+        ).join("\n")
+);
 
 const t1 = performance.now();
 console.log(`Runtime: ${t1 - t0}ms`);
