@@ -44,6 +44,17 @@ while (open.length > 0) {
             if (!input[ny]) continue;
             const next = input[ny][nx];
             if (!next || closed.includes(next)) continue;
+
+            const nd = current.g + next.c;
+            if (open.includes(next)) {
+                if (nd < next.g)
+                    next.g = nd;
+                continue;
+            }
+
+            next.g = nd;
+            next.h = man_dist(next, end);
+            open.push(next);
         }
 }
 console.log(end.g);
