@@ -33,6 +33,18 @@ while (open.length > 0) {
     const current = open.splice(record.index, 1)[0];
     closed.push(current);
     if (current === end) break;
+
+    for (let j = -1; j < 2; j++)
+        for (let i = -1; i < 2; i++) {
+            if (!(i === 0 ^ j === 0)) continue;
+
+            const nx = current.x + i;
+            const ny = current.y + j;
+
+            if (!input[ny]) continue;
+            const next = input[ny][nx];
+            if (!next || closed.includes(next)) continue;
+        }
 }
 console.log(end.g);
 
