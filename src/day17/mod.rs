@@ -16,6 +16,18 @@ struct Block {
     y: usize,
 }
 
+impl Block {
+    fn distance(&self, other: &Block) -> i32 {
+        let dx = (other.x as i32 - self.x as i32).abs();
+        let dy = (other.y as i32 - self.y as i32).abs();
+        dx + dy
+    }
+
+    fn compare(&self, other: &Block) -> bool {
+        self.x == other.x && self.y == other.y
+    }
+}
+
 fn setup() -> Vec<Vec<Block>> {
     let name = "day17";
     println!("Executing module '{name}' entrypoint . . . ");
