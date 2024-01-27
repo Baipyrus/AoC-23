@@ -8,6 +8,14 @@ pub fn part_one() {
     let input = setup();
 }
 
+fn pathfind(grid: &mut Vec<Vec<Block>>) -> i32 {
+}
+
+struct Block {
+    x: usize,
+    y: usize,
+}
+
 fn setup() -> Vec<Vec<Block>> {
     let name = "day17";
     println!("Executing module '{name}' entrypoint . . . ");
@@ -17,4 +25,19 @@ fn setup() -> Vec<Vec<Block>> {
     let input = match_inputs(lines, &r".");
 
     convert_num(input)
+        .iter()
+        .enumerate()
+        .map(|(j, v)| {
+            v.iter()
+                .enumerate()
+                .map(|(i, n)| Block {
+                    x: i,
+                    y: j,
+                    c: *n,
+                    d: 0,
+                    h: 0,
+                })
+                .collect()
+        })
+        .collect()
 }
