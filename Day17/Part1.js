@@ -20,6 +20,20 @@ const start = input[0][0];
 const end = input.slice(-1)[0].slice(-1)[0];
 const open = [start], closed = [];
 
+while (open.length > 0) {
+    let record = {};
+    for (const [index, next] of Object.entries(open)) {
+        const distance = next.g + next.h;
+        if (record?.distance ?? -1 < distance) {
+            record.distance = distance;
+            record.index = +index;
+        }
+    }
+
+    const current = open.splice(record.index, 1)[0];
+    closed.push(current);
+    if (current === end) break;
+}
 console.log(end.g);
 
 const t1 = performance.now();
