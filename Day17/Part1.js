@@ -14,8 +14,17 @@ const input = readFileSync("input.txt")
             g: 0,
             h: 0,
             p: null,
+            d: null
         })));
 const man_dist = (a, b) => Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
+const get_dir = (e) => {
+    const { d } = e;
+    if (!d) return e.c;
+    if (d.x === 1 && d.y === 0) return ">";
+    if (d.x === 0 && d.y === 1) return "v";
+    if (d.x === -1 && d.y === 0) return "<";
+    if (d.x === 0 && d.y === -1) return "^";
+};
 
 const start = input[0][0];
 const end = input.slice(-1)[0].slice(-1)[0];
@@ -46,17 +55,23 @@ while (open.length > 0) {
             const next = input[ny][nx];
             if (!next || closed.includes(next)) continue;
 
+            const dir_check = current.d?.x === i && current.d?.y === j;
+            const direction = { x: i, y: j, c: dir_check ? (current?.c ?? 0) + 1 : 1 };
+            if (direction.c > 3) continue;
+
             const nd = current.g + next.c;
             if (open.includes(next)) {
                 if (nd < next.g) {
                     next.g = nd;
                     next.p = current;
+                    next.d = direction;
                 }
                 continue;
             }
 
             next.g = nd;
             next.p = current;
+            next.d = direction;
             next.h = man_dist(next, end);
             open.push(next);
         }
@@ -74,7 +89,7 @@ console.log(
         .map(a => a
             .map(b => shortest
                 .includes(b) ?
-                "*" : b.c
+                get_dir(b) : b.c
             ).join("")
         ).join("\n")
 );
